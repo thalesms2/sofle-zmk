@@ -146,14 +146,14 @@
 &kp C_MUTE        &sk LEFT_ALT         &sk LEFT_CONTROL         &sk LEFT_GUI         &holdTapLayer 1 1      &holdToLayer 3 RETURN    &kp ENTER        &kp SPACE  &kp BACKSPACE           &holdTapLayer 2 2     &sk RIGHT_CONTROL         &sk RIGHT_ALT
             >;
 
-            sensor-bindings = <&senRotateUD>;
+            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
             display-name = "LAYER0";
         };
 
         Move {
             bindings = <
 &kp INSERT   &kp F1        &kp F2            &kp F3        &kp F4                &kp F5       &mmv MOVE_UP     &kp F6          &kp F7     &kp F8          &kp F9           &kp F10           &kp EQUAL
-&kp LS(TAB)  &kp LG(Q)     &trans            &kp LG(E)     &kp LG(R)             &altTsupT    &mmv MOVE_DOWN   &trans          &trans     &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
+&kp LS(TAB)  &kp LG(Q)     &kp LC(W)         &kp LG(E)     &kp LG(R)             &altTsupT    &mmv MOVE_DOWN   &trans          &trans     &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
 &trans       &kp LEFT_ALT  &kp LEFT_CONTROL  &kp LEFT_GUI  &kp LEFT_SHIFT        &kp F11      &mmv MOVE_LEFT   &kp LEFT_ARROW  &kp DOWN   &kp UP_ARROW    &kp RIGHT        &trans            &trans
 &trans       &kp LC(Z)     &kp LC(X)         &kp LC(C)     &HoldTap LG(V) LC(V)  &kp F12      &mmv MOVE_RIGHT  &kp HOME        &kp PG_DN  &kp PG_UP       &kp END          &trans            &trans
 &kp C_MUTE   &trans        &trans            &trans        &trans                &trans       &mkp LCLK        &trans          &kp DEL    &trans          &trans           &trans
@@ -172,29 +172,27 @@
 &trans  &trans  &trans  &trans  &trans  &kp LC(SPACE)    &trans  &trans  &trans  &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&senRotateLF>;
+            sensor-bindings = <&inc_dec_kp LA(K_SCROLL_UP) LA(K_SCROLL_DOWN)>;
         };
 
         numPad {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &kp UP_ARROW    &trans  &kp KP_NUMLOCK   &kp KP_DIVIDE    &kp KP_ASTERISK  &kp KP_MINUS  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &kp DOWN        &trans  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_PLUS   &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &kp LEFT_ARROW  &trans  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_DOT    &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &kp RIGHT       &trans  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_ENTER  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &kp ENTER       &trans  &trans           &kp KP_NUMBER_0  &kp KP_COMMA     &trans
+&trans  &trans  &trans          &trans          &trans           &trans      &kp UP_ARROW    &trans    &kp KP_NUMLOCK   &kp KP_DIVIDE    &kp KP_ASTERISK  &kp KP_MINUS  &trans
+&trans  &trans  &mkp MB1        &mmv MOVE_UP    &mkp MB2         &trans      &kp DOWN        &trans    &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_PLUS   &trans
+&trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp MB3    &kp LEFT_ARROW  &mkp MB5  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_DOT    &trans
+&trans  &trans  &trans          &trans          &trans           &trans      &kp RIGHT       &mkp MB4  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_ENTER  &trans
+&trans  &trans  &trans          &trans          &trans           &trans      &kp ENTER       &mkp MB1  &mkp MB3         &mkp MB2         &kp KP_NUMBER_0  &kp KP_COMMA
             >;
         };
 
         Config {
             bindings = <
-&sys_reset       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &rgb_ug RGB_HUI                    &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &rgb_ug RGB_EFF  &rgb_ug RGB_COLOR_HSB(0,0,100)
-&trans           &out OUT_BLE  &out OUT_USB  &trans        &bt BT_CLR    &bt BT_CLR_ALL    &rgb_ug RGB_HUD                    &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &rgb_ug RGB_EFR  &rgb_ug RGB_COLOR_HSB(231,95,47)
-&trans           &trans        &trans        &trans        &trans        &trans            &rgb_ug RGB_SAI                    &trans           &trans           &trans           &trans           &trans           &rgb_ug RGB_COLOR_HSB(17,92,51)
-&trans           &trans        &trans        &trans        &trans        &bootloader       &rgb_ug RGB_SAD                    &bootloader      &trans           &trans           &trans           &trans           &rgb_ug RGB_COLOR_HSB(339,100,50)
-&rgb_ug RGB_TOG  &trans        &trans        &trans        &trans        &soft_off         &rgb_ug RGB_COLOR_HSB(314,100,50)  &trans           &trans           &trans           &trans           &trans
+&sys_reset  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &rgb_ug RGB_HUI  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &rgb_ug RGB_EFF  &rgb_ug RGB_TOG
+&trans      &out OUT_BLE  &out OUT_USB  &trans        &bt BT_CLR    &bt BT_CLR_ALL    &rgb_ug RGB_HUD  &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &rgb_ug RGB_EFR  &trans
+&trans      &trans        &trans        &trans        &trans        &trans            &rgb_ug RGB_SAI  &trans           &trans           &trans           &trans           &trans           &trans
+&trans      &trans        &trans        &trans        &trans        &bootloader       &rgb_ug RGB_SAD  &bootloader      &trans           &trans           &trans           &trans           &trans
+&trans      &trans        &trans        &trans        &trans        &soft_off         &rgb_ug RGB_TOG  &trans           &trans           &trans           &rgb_ug RGB_ON   &rgb_ug RGB_OFF
             >;
-
-            sensor-bindings = <&senRotateRGB>;
         };
     };
 };
