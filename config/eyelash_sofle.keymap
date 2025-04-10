@@ -5,11 +5,10 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/outputs.h>
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
@@ -27,58 +26,109 @@
     trigger-period-ms = <16>;
 };
 
-
 / {
-
     scroll_encoder: scroll_encoder {
         compatible = "zmk,behavior-sensor-rotate";
         #sensor-binding-cells = <0>;
         bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
         tap-ms = <100>;
+    };
+
+    HoldTap: HoldTap {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOLDTAP";
+        bindings = <&kp>, <&kp>;
+
+        #binding-cells = <2>;
+        flavor = "tap-preferred";
+        tapping-term-ms = <400>;
+    };
+
+    srV: srV {
+        compatible = "zmk,behavior-sensor-rotate-var";
+        label = "SRV";
+        #sensor-binding-cells = <2>;
+        bindings = <&rgb_ug>, <&rgb_ug>;
+    };
+
+    holdToLayer: holdToLayer {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOLDTOLAYER";
+        bindings = <&mo>, <&kp>;
+
+        #binding-cells = <2>;
+        tapping-term-ms = <400>;
+        flavor = "tap-preferred";
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        esc4nvim {
+            bindings = <&kp ESCAPE>;
+            key-positions = <57 30>;
+        };
+
+        toMove {
+            bindings = <&to 1>;
+            key-positions = <28 29 30>;
+        };
+
+        toMain {
+            bindings = <&to 0>;
+            key-positions = <34 35 36>;
+        };
+
+        print {
+            bindings = <&kp PRINTSCREEN>;
+            key-positions = <59 51>;
+        };
+
+        print+super {
+            bindings = <&kp LG(PRINTSCREEN)>;
+            key-positions = <57 39>;
+        };
+
+        alt+tab {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <59 34>;
+        };
+    };
+
+    behaviors {
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        layer0 {
+        Main {
             bindings = <
-&kp ESC     &kp N1     &kp N2        &kp N3        &kp N4  &kp N5       &kp UP_ARROW     &kp N6     &kp N7     &kp N8     &kp N9           &kp N0      &kp BACKSPACE
-&kp TAB     &kp Q      &kp W         &kp E         &kp R   &kp T        &kp DOWN_ARROW   &kp Y      &kp U      &kp I      &kp O            &kp P       &kp BSLH
-&kp CAPS    &kp A      &kp S         &kp D         &kp F   &kp G        &kp LEFT_ARROW   &kp H      &kp J      &kp K      &kp L            &kp SEMI    &kp APOS
-&kp LSHFT   &kp Z      &kp X         &kp C         &kp V   &kp B        &kp RIGHT_ARROW  &kp N      &kp M      &kp COMMA  &kp DOT          &kp FSLH    &kp ENTER
-&kp C_MUTE  &kp LCTRL  &kp LEFT_GUI  &kp LEFT_ALT  &mo 1   &kp SPACE    &kp ENTER        &kp SPACE  &kp ENTER  &mo 2      &kp RIGHT_SHIFT  &kp DELETE
+&kp GRAVE         &kp N1               &kp N2                   &kp N3               &kp N4                 &kp N5                   &kp UP_ARROW     &kp N6     &kp N7                  &kp N8                &kp N9                    &kp N0                   &kp MINUS
+&kp TAB           &kp Q                &kp W                    &kp E                &kp R                  &kp T                    &kp DOWN_ARROW   &kp Y      &kp U                   &kp I                 &kp O                     &kp P                    &kp BSLH
+&kp LEFT_CONTROL  &HoldTap LEFT_ALT A  &HoldTap LEFT_CONTROL S  &HoldTap LEFT_GUI D  &HoldTap LEFT_SHIFT F  &kp G                    &kp LEFT_ARROW   &kp H      &HoldTap RIGHT_SHIFT J  &HoldTap RIGHT_GUI K  &HoldTap RIGHT_CONTROL L  &HoldTap RIGHT_ALT SEMI  &kp APOS
+&kp LSHFT         &kp Z                &kp X                    &kp C                &kp V                  &kp B                    &kp RIGHT_ARROW  &kp N      &kp M                   &kp COMMA             &kp DOT                   &kp FSLH                 &holdToLayer 3 ESCAPE
+&kp C_MUTE        &sk LEFT_ALT         &sk LEFT_CONTROL         &sk LEFT_GUI         &mo 1                  &HoldTap SPACE RETURN    &kp ENTER        &kp SPACE  &kp BACKSPACE           &mo 2                 &sk RIGHT_CONTROL         &sk RIGHT_ALT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
             display-name = "LAYER0";
         };
 
-        layer_1 {
+        Move {
             bindings = <
-&kp GRAVE   &kp F1           &kp F2          &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &kp F6           &kp F7           &kp F8      &kp F9     &kp F10           &trans
-&trans      &kp GRAVE        &mkp LCLK       &mkp MCLK        &mkp RCLK        &mkp MB4           &mmv MOVE_DOWN   &kp PG_UP        &kp END          &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
-&trans      &kp TILDE        &trans          &trans           &trans           &mkp MB5           &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_SPI    &mmv MOVE_RIGHT  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp INSERT  &kp F11    &kp F12           &trans
-&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
+&kp INSERT  &kp F1           &kp F2          &kp F3           &kp F4           &kp F5     &mmv MOVE_UP     &kp F6  &kp F7    &kp F8          &kp F9           &kp F10           &kp EQUAL
+&trans      &trans           &trans          &trans           &kp F11          &kp F12    &mmv MOVE_DOWN   &trans  &trans    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
+&trans      &trans           &trans          &trans           &trans           &trans     &mmv MOVE_LEFT   &trans  &kp LEFT  &kp DOWN        &kp UP_ARROW     &kp RIGHT         &trans
+&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans     &mmv MOVE_RIGHT  &trans  &kp HOME  &kp PAGE_DOWN   &kp PG_UP        &kp END           &trans
+&kp C_MUTE  &trans           &trans          &trans           &trans           &trans     &mkp LCLK        &trans  &kp DEL   &trans          &trans           &trans
             >;
 
             display-name = "layer1";
             sensor-bindings = <&scroll_encoder>;
         };
 
-        layer_2 {
-            bindings = <
-&kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &kp F6  &kp F7  &kp F8      &kp F9     &kp F10      &trans
-&trans     &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &trans  &trans  &kp F11     &kp F12    &kp UNDER    &kp PLUS
-&trans     &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans     &kp LBRC     &kp RBRC
-&trans     &sys_reset    &trans          &bootloader   &trans        &trans          &mmv MOVE_RIGHT  &trans  &trans  &sys_reset  &soft_off  &bootloader  &trans
-&trans     &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans  &trans  &trans      &trans     &trans
-            >;
-
-            sensor-bindings = <&scroll_encoder>;
-        };
-
-        layer_3 {
+        Shortcut {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
@@ -86,6 +136,18 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
+        };
+
+        Config {
+            bindings = <
+&trans  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &trans  &trans  &trans      &trans     &trans       &trans
+&trans  &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &trans  &trans  &trans      &trans     &trans       &trans
+&trans  &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans     &trans       &trans
+&trans  &sys_reset    &trans          &bootloader   &trans        &trans          &mmv MOVE_RIGHT  &trans  &trans  &sys_reset  &soft_off  &bootloader  &trans
+&trans  &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans  &trans  &trans      &trans     &trans
+            >;
+
+            sensor-bindings = <&scroll_encoder>;
         };
     };
 };
