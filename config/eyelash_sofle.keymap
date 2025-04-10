@@ -27,14 +27,6 @@
 };
 
 / {
-    scroll_encoder: scroll_encoder {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-        tap-ms = <100>;
-    };
-
     HoldTap: HoldTap {
         compatible = "zmk,behavior-hold-tap";
         label = "HOLDTAP";
@@ -43,13 +35,6 @@
         #binding-cells = <2>;
         flavor = "tap-preferred";
         tapping-term-ms = <400>;
-    };
-
-    srV: srV {
-        compatible = "zmk,behavior-sensor-rotate-var";
-        label = "SRV";
-        #sensor-binding-cells = <2>;
-        bindings = <&rgb_ug>, <&rgb_ug>;
     };
 
     holdToLayer: holdToLayer {
@@ -79,6 +64,27 @@
         bindings = <&kp LA(T)>, <&kp LG(T)>;
 
         tapping-term-ms = <300>;
+    };
+
+    senRotateUD: senRotateUD {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "SENROTATEUD";
+        #sensor-binding-cells = <0>;
+        bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+    };
+
+    senRotateLF: senRotateLF {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "SENROTATELF";
+        #sensor-binding-cells = <0>;
+        bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+    };
+
+    senRotateRGB: senRotateRGB {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "SENROTATERGB";
+        #sensor-binding-cells = <0>;
+        bindings = <&rgb_ug RGB_EFF>, <&rgb_ug RGB_EFR>;
     };
 
     combos {
@@ -140,7 +146,7 @@
 &kp C_MUTE        &sk LEFT_ALT         &sk LEFT_CONTROL         &sk LEFT_GUI         &holdTapLayer 1 1      &holdToLayer 3 RETURN    &kp ENTER        &kp SPACE  &kp BACKSPACE           &holdTapLayer 2 2     &sk RIGHT_CONTROL         &sk RIGHT_ALT
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+            sensor-bindings = <&senRotateUD>;
             display-name = "LAYER0";
         };
 
@@ -154,7 +160,7 @@
             >;
 
             display-name = "layer1";
-            sensor-bindings = <&scroll_encoder>;
+            sensor-bindings = <&inc_dec_kp K_VOLUME_UP K_VOLUME_DOWN>;
         };
 
         Shortcut {
@@ -165,6 +171,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans           &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &kp LC(SPACE)    &trans  &trans  &trans  &trans  &trans  &trans
             >;
+
+            sensor-bindings = <&senRotateLF>;
         };
 
         numPad {
@@ -186,7 +194,7 @@
 &rgb_ug RGB_TOG  &trans        &trans        &trans        &trans        &soft_off         &rgb_ug RGB_COLOR_HSB(314,100,50)  &trans           &trans           &trans           &trans           &trans
             >;
 
-            sensor-bindings = <&srV RGB_EFF RGB_EFR>;
+            sensor-bindings = <&senRotateRGB>;
         };
     };
 };
