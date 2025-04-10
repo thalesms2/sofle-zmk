@@ -66,25 +66,11 @@
         tapping-term-ms = <300>;
     };
 
-    senRotateUD: senRotateUD {
-        compatible = "zmk,behavior-sensor-rotate";
-        label = "SENROTATEUD";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-    };
-
-    senRotateLF: senRotateLF {
-        compatible = "zmk,behavior-sensor-rotate";
-        label = "SENROTATELF";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-    };
-
-    senRotateRGB: senRotateRGB {
-        compatible = "zmk,behavior-sensor-rotate";
-        label = "SENROTATERGB";
-        #sensor-binding-cells = <0>;
-        bindings = <&rgb_ug RGB_EFF>, <&rgb_ug RGB_EFR>;
+    rotateUD: rotateUD {
+        compatible = "zmk,behavior-sensor-rotate-var";
+        label = "ROTATEUD";
+        #sensor-binding-cells = <2>;
+        bindings = <&msc>, <&msc>;
     };
 
     combos {
@@ -146,7 +132,7 @@
 &kp C_MUTE        &sk LEFT_ALT         &sk LEFT_CONTROL         &sk LEFT_GUI         &holdTapLayer 1 1      &holdToLayer 3 RETURN    &kp ENTER        &kp SPACE  &kp BACKSPACE           &holdTapLayer 2 2     &sk RIGHT_CONTROL         &sk RIGHT_ALT
             >;
 
-            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&rotateUD SCRL_UP SCRL_DOWN>;
             display-name = "LAYER0";
         };
 
