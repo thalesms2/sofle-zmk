@@ -77,7 +77,16 @@
         compatible = "zmk,behavior-sensor-rotate";
         label = "SCROLLH";
         #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
+        tap-ms = <100>;
+    };
+
+    new_behavior: new_behavior {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "NEW_BEHAVIOR";
+        #sensor-binding-cells = <0>;
+        bindings = <&msc SCRL_RIGHT>, <&mmv MOVE_LEFT>;
     };
 
     combos {
