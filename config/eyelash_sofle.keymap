@@ -73,6 +73,13 @@
         bindings = <&msc>, <&msc>;
     };
 
+    scrollH: scrollH {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "SCROLLH";
+        #sensor-binding-cells = <0>;
+        bindings = <&msc MOVE_X(20)>, <&msc MOVE_X(-20)>;
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -132,7 +139,7 @@
 &kp C_MUTE        &sk LEFT_ALT         &sk LEFT_CONTROL         &sk LEFT_GUI         &holdTapLayer 1 1      &holdToLayer 3 RETURN    &kp ENTER        &kp SPACE  &kp BACKSPACE           &holdTapLayer 2 2     &sk RIGHT_CONTROL         &sk RIGHT_ALT
             >;
 
-            sensor-bindings = <&rotateUD SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&scrollH>;
             display-name = "LAYER0";
         };
 
