@@ -79,7 +79,7 @@
         compatible = "zmk,behavior-sensor-rotate";
         label = "SCROLLV";
         #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_RIGHT>, <&mmv MOVE_LEFT>;
+        bindings = <&msc SCRL_RIGHT>, <&msc SCRL_LEFT>;
 
         tap-ms = <100>;
     };
