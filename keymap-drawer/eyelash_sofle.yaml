@@ -7,7 +7,7 @@ layers:
   - {t: '3', s: '#'}
   - {t: '4', s: $}
   - {t: '5', s: '%'}
-  - $$mdi:arrow-up-bold$$
+  - {t: '$$mdi:menu-up$$', s: '$$mdi:mouse$$'}
   - {t: '6', s: ^}
   - {t: '7', s: '&'}
   - {t: '8', s: '*'}
@@ -20,7 +20,7 @@ layers:
   - E
   - R
   - T
-  - $$mdi:arrow-down-bold$$
+  - {t: '$$mdi:menu-down$$', s: '$$mdi:mouse$$'}
   - Y
   - U
   - I
@@ -33,7 +33,7 @@ layers:
   - {t: D, h: '$$mdi:apple-keyboard-command$$'}
   - {t: F, h: '$$mdi:apple-keyboard-shift$$'}
   - G
-  - $$mdi:arrow-left-bold$$
+  - {t: '$$mdi:menu-left$$', s: '$$mdi:mouse$$'}
   - H
   - {t: J, h: '$$mdi:apple-keyboard-shift$$'}
   - {t: K, h: RIGHT GUI}
@@ -46,7 +46,7 @@ layers:
   - C
   - V
   - B
-  - $$mdi:arrow-right-bold$$
+  - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
   - N
   - M
   - {t: ',', s: <}
@@ -59,7 +59,7 @@ layers:
   - {t: '$$mdi:apple-keyboard-command$$', h: '$$mdi:gesture-tap-hold$$'}
   - {t: layer1, h: layer1}
   - {t: RETURN, h: numPad}
-  - {t: '$$mdi:keyboard-return$$', type: enter}
+  - '&mkp MB1'
   - $$mdi:keyboard-space$$
   - {t: '$$mdi:backspace$$', type: backspace}
   - {t: Shortcut, h: Shortcut}
@@ -72,7 +72,7 @@ layers:
   - F3
   - F4
   - F5
-  - {t: '$$mdi:menu-up$$', s: '$$mdi:mouse$$'}
+  - $$mdi:arrow-up-bold$$
   - F6
   - F7
   - F8
@@ -85,7 +85,7 @@ layers:
   - Gui+E
   - Gui+R
   - '&altTsupT'
-  - {t: '$$mdi:menu-down$$', s: '$$mdi:mouse$$'}
+  - $$mdi:arrow-down-bold$$
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - '{'
@@ -98,7 +98,7 @@ layers:
   - $$mdi:apple-keyboard-command$$
   - $$mdi:apple-keyboard-shift$$
   - F11
-  - {t: '$$mdi:menu-left$$', s: '$$mdi:mouse$$'}
+  - $$mdi:arrow-left-bold$$
   - $$mdi:arrow-left-bold$$
   - $$mdi:arrow-down-bold$$
   - $$mdi:arrow-up-bold$$
@@ -111,7 +111,7 @@ layers:
   - Ctl+C
   - {t: Ctl+V, h: V}
   - F12
-  - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
+  - $$mdi:arrow-right-bold$$
   - HOME
   - PG DN
   - PG UP
@@ -124,7 +124,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
-  - $$mdi:mouse-left-click-outline$$
+  - {t: '$$mdi:keyboard-return$$', type: enter}
   - {t: '$$mdi:transfer$$', type: trans}
   - $$mdi:backspace-reverse-outline$$
   - {t: '$$mdi:transfer$$', type: trans}
